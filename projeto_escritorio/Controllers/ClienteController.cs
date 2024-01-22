@@ -18,4 +18,10 @@ public class ClienteController: ControllerBase
         Console.WriteLine(cliente.Nome);
         Console.WriteLine(cliente.Endereco);
     }
+
+    [HttpGet]
+    public IEnumerable<Cliente> RecuperaClientes()
+    {
+        return clientes;
+    }
 }
