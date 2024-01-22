@@ -22,9 +22,9 @@ public class ClienteController: ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Cliente> RecuperaClientes()
+    public IEnumerable<Cliente> RecuperaClientes([FromQuery]int skip=0, [FromQuery] int take=10)
     {
-        return clientes;
+        return clientes.Skip(skip).Take(take);
     }
 
     [HttpGet("{id}")]
