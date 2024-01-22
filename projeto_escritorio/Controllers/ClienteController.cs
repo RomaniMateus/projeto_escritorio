@@ -13,12 +13,11 @@ public class ClienteController: ControllerBase
     private static List<Cliente> clientes = new List<Cliente>();
 
     [HttpPost]
-    public void AdicionaCliente([FromBody]Cliente cliente)
+    public IActionResult AdicionaCliente([FromBody]Cliente cliente)
     {
         cliente.Id = id++;
         clientes.Add(cliente);
-        Console.WriteLine(cliente.Nome);
-        Console.WriteLine(cliente.Endereco);
+        return CreatedAtAction(nameof(RecuperaClientePorId), new {id = cliente.Id}, cliente);
     }
 
     [HttpGet]
@@ -28,8 +27,11 @@ public class ClienteController: ControllerBase
     }
 
     [HttpGet("{id}")]
-    public Cliente? RecuperaClientePorId(int id)
+    public IActionResult RecuperaClientePorId(int id)
     {
-        return clientes.FirstOrDefault(cliente => cliente.Id == id);
+        var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
+
+        if (cliente == null) return NotFound();
+        return Ok(cliente);
     }
 }
