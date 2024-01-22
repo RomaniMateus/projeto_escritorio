@@ -9,7 +9,7 @@ public class Cliente
     public string Nome { get; set; }
     
     [Required(ErrorMessage ="O CPF do cliente é obrigatório")]
-    [MaxLength(11, ErrorMessage = "O CPF não deve possuir mais de 11 caracteres")]
+    [MinLength(14, ErrorMessage = "O CPF não deve possuir mais de 14 caracteres")]
     public string Cpf { get; set; }
     
     [Required(ErrorMessage = "O endereço do cliente é obrigatório")]
