@@ -26,4 +26,10 @@ public class ClienteController: ControllerBase
     {
         return clientes;
     }
+
+    [HttpGet("{id}")]
+    public Cliente? RecuperaClientePorId(int id)
+    {
+        return clientes.FirstOrDefault(cliente => cliente.Id == id);
+    }
 }
