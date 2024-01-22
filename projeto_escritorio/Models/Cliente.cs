@@ -4,6 +4,8 @@ namespace projeto_escritorio.Models;
 
 public class Cliente
 {
+    public int Id { get; set; }
+
     [Required(ErrorMessage ="O nome do cliente é obrigatório")]
     [MinLength(10, ErrorMessage = "O nome deve possuir pelo menos 10 caracteres")]
     public string Nome { get; set; }
@@ -19,7 +21,7 @@ public class Cliente
     [Required(ErrorMessage = "O telefone do cliente é obrigatório")]
     [MinLength(10, ErrorMessage = "O telefone deve possuir pelo menos 10 caracteres")]
     public string Telefone { get; set; }
-    
+
     //Adicionar o(s) ID(s) da(s) loja(s) 
 }
 

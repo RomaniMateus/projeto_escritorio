@@ -9,11 +9,13 @@ namespace projeto_escritorio.Controllers;
 
 public class ClienteController: ControllerBase
 {
+    private static int id = 0;
     private static List<Cliente> clientes = new List<Cliente>();
 
     [HttpPost]
     public void AdicionaCliente([FromBody]Cliente cliente)
     {
+        cliente.Id = id++;
         clientes.Add(cliente);
         Console.WriteLine(cliente.Nome);
         Console.WriteLine(cliente.Endereco);
