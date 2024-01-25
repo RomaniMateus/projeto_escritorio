@@ -4,6 +4,8 @@ namespace projeto_escritorio.Models;
 
 public class Cliente
 {
+    [Key]
+    [Required]
     public int Id { get; set; }
 
     [Required(ErrorMessage ="O nome do cliente é obrigatório")]
