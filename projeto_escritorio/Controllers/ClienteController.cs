@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using projeto_escritorio.Data;
+using projeto_escritorio.Data.Dtos;
 using projeto_escritorio.Models;
 using System.Runtime.CompilerServices;
 
@@ -9,8 +12,14 @@ namespace projeto_escritorio.Controllers;
 
 public class ClienteController: ControllerBase
 {
-    private static int id = 0;
-    private static List<Cliente> clientes = new List<Cliente>();
+    private ClienteContext _context;
+    private IMapper _mapper;
+
+    public ClienteController(ClienteContext context, IMapper mapper)
+    {
+        _context = context;
+        _mapper = mapper;
+    }
 
     [HttpPost]
     public IActionResult AdicionaCliente([FromBody]Cliente cliente)
