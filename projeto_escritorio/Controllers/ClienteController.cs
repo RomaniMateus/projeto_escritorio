@@ -22,10 +22,11 @@ public class ClienteController: ControllerBase
     }
 
     [HttpPost]
-    public IActionResult AdicionaCliente([FromBody]Cliente cliente)
+    public IActionResult AdicionaCliente([FromBody]CreateClienteDto clienteDto)
     {
-        cliente.Id = id++;
-        clientes.Add(cliente);
+        Cliente cliente = _mapper.Map<Cliente>(clienteDto);
+        _context.Clientes.Add(cliente);
+        _context.SaveChanges();
         return CreatedAtAction(nameof(RecuperaClientePorId), new {id = cliente.Id}, cliente);
     }
 
