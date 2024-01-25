@@ -32,13 +32,13 @@ public class ClienteController: ControllerBase
     [HttpGet]
     public IEnumerable<Cliente> RecuperaClientes([FromQuery]int skip=0, [FromQuery] int take=10)
     {
-        return clientes.Skip(skip).Take(take);
+        return _context.Clientes.Skip(skip).Take(take);
     }
 
     [HttpGet("{id}")]
     public IActionResult RecuperaClientePorId(int id)
     {
-        var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
+        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
 
         if (cliente == null) return NotFound();
         return Ok(cliente);
