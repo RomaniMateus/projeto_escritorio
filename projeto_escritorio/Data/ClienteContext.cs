@@ -11,5 +11,6 @@ namespace projeto_escritorio.Data
         }
 
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Loja> Lojas { get; set; }
     }
 }
