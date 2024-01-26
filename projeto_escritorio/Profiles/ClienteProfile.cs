@@ -11,5 +11,6 @@ public class ClienteProfile : Profile
         CreateMap<CreateClienteDto, Cliente>();
         CreateMap<UpdateClienteDto, Cliente>();
         CreateMap<Cliente, UpdateClienteDto>();
+        CreateMap<Cliente, ReadClienteDto>();
     }
 }
