@@ -77,4 +77,17 @@ public class ClienteController: ControllerBase
         _context.SaveChanges();
         return NoContent();
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeletaCliente(int id)
+    {
+        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id.Equals(id));
+
+        if (cliente == null) return NotFound();
+
+        _context.Remove(cliente);
+        _context.SaveChanges();
+
+        return NoContent();
+    }
 }
