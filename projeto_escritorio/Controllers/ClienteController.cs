@@ -32,9 +32,9 @@ public class ClienteController: ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Cliente> RecuperaClientes([FromQuery]int skip=0, [FromQuery] int take=10)
+    public IEnumerable<ReadClienteDto> RecuperaClientes([FromQuery]int skip=0, [FromQuery] int take=10)
     {
-        return _context.Clientes.Skip(skip).Take(take);
+        return _mapper.Map<List<ReadClienteDto>>(_context.Clientes.Skip(skip).Take(take));
     }
 
     [HttpGet("{id}")]
@@ -43,7 +43,9 @@ public class ClienteController: ControllerBase
         var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
 
         if (cliente == null) return NotFound();
-        return Ok(cliente);
+
+        var filmeDto = _mapper.Map<ReadClienteDto>(cliente);
+        return Ok(filmeDto);
     }
 
     [HttpPut("{id}")]
