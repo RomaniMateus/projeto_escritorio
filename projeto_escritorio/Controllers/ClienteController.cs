@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using projeto_escritorio.Data;
 using projeto_escritorio.Data.Dtos;
@@ -53,6 +54,26 @@ public class ClienteController: ControllerBase
         if (cliente == null) return NotFound();
 
         _mapper.Map(clienteDto, cliente);
+        _context.SaveChanges();
+        return NoContent();
+    }
+
+    [HttpPatch("{id}")]
+    public IActionResult AtualizaClienteParcial(int id, JsonPatchDocument<UpdateClienteDto> patch)
+    {
+        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id.Equals(id));
+
+        if (cliente == null) return NotFound();
+
+        var clienteParaAtualizar = _mapper.Map<UpdateClienteDto>(cliente);
+        patch.ApplyTo(clienteParaAtualizar, ModelState);
+
+        if (!TryValidateModel(clienteParaAtualizar))
+        {
+            return ValidationProblem(ModelState);
+        }
+
+        _mapper.Map(clienteParaAtualizar, cliente);
         _context.SaveChanges();
         return NoContent();
     }
