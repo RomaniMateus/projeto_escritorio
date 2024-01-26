@@ -44,4 +44,16 @@ public class ClienteController: ControllerBase
         if (cliente == null) return NotFound();
         return Ok(cliente);
     }
+
+    [HttpPut("{id}")]
+    public IActionResult AtualizaCliente(int id, [FromBody] UpdateClienteDto clienteDto)
+    {
+        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id.Equals(id));
+
+        if (cliente == null) return NotFound();
+
+        _mapper.Map(clienteDto, cliente);
+        _context.SaveChanges();
+        return NoContent();
+    }
 }
