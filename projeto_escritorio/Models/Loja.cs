@@ -19,5 +19,5 @@ public class Loja
     [MinLength(20, ErrorMessage ="O campo 'Endereço' deve possui ao menos 20 caracteres")]
     public string Endereco { get; set; }
 
-    public virtual ICollection<Divida> Dividas { get; set; }
+    public virtual ICollection<Divida>? Dividas { get; set; }
 }
