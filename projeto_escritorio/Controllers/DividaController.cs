@@ -32,7 +32,9 @@ public class DividaController : ControllerBase
     [HttpGet]
     public IEnumerable<ReadDividaDto> RecuperaDividas([FromQuery] int skip = 0, [FromQuery] int take = 10)
     {
-        return _mapper.Map<List<ReadDividaDto>>(_context.Dividas.Skip(skip).Take(take));
+        var listaDividasBanco = _context.Dividas.ToList();
+        var listaDividas = _mapper.Map<List<ReadDividaDto>>(listaDividasBanco);
+        return listaDividas;
     }
 
     [HttpGet("{id}")]
