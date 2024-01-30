@@ -20,13 +20,13 @@ public class LojaController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult AdicionaLoja([FromBody] CreateLojaDto lojaDto)
+    public IActionResult AdicionaLoja([FromBody]CreateLojaDto lojaDto)
     {
         Loja loja = _mapper.Map<Loja>(lojaDto);
 
         _context.Lojas.Add(loja);
         _context.SaveChanges();
-        return CreatedAtActionResult(nameof(RecuperaLojaPorId), new { Id = loja.Id }, lojaDto);
+        return CreatedAtAction(nameof(RecuperaLojaPorId), new { Id = loja.Id }, lojaDto);
     }
 
     [HttpGet]
