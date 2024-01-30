@@ -24,6 +24,8 @@ public class Cliente
     [MinLength(10, ErrorMessage = "O telefone deve possuir pelo menos 10 caracteres")]
     public string Telefone { get; set; }
 
+    public virtual ICollection<Divida> Dividas { get; set; }
+
     //Adicionar o(s) ID(s) da(s) loja(s) 
 }
 
