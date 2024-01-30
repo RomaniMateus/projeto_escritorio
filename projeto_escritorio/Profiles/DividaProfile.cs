@@ -9,6 +9,8 @@ public class DividaProfile : Profile
     public DividaProfile()
     {
         CreateMap<CreateDividaDto, Divida>();
-        CreateMap<Divida, ReadDividaDto>();
+        CreateMap<Divida, ReadDividaDto>()
+            .ForMember(dividaDto => dividaDto.cliente, opt => opt.MapFrom(divida => divida.Cliente))
+            .ForMember(dividaDto => dividaDto.loja, opt => opt.MapFrom(divida => divida.Loja));
     }
 }
